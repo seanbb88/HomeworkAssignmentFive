@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jim Carrey Trivia!</title>
+    <link rel="stylesheet" type="text/css" href="game.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="header" class="header">
+        <img class="jimbo" id="jimbo" src="jim.png">
+        <div class="header2">
+            <h1>Jim Carrey Trivia Game!</h1>
+            <h3>Carrey to test your knowledge?</h3>
+        </div>
+        <img class="jimbo2" id="jimbo" src="jim.png">
+    </div>
+
+    <div id="question-body" class="question-body">
+        <div id="question-zone" class="question-zone">
+            <h1 id="question-area">Are you ready to test your knowledge on Jim Carrey? Hurry up! Dont let time run out!</h1>
+
+        </div>
+        <div id="answers-zone" class="answers-zone">
+            <button id="buttons" class="button1"></button>
+            <button id="buttons" class="button2"></button>
+            <button id="buttons" class="button3"></button>
+            <button id="buttons" class="button4"></button>
+        </div>
+        <div id="response-display" class="response-display">
+
+        </div>
+        <div class="score">
+            <p>Score</p>
+            <output id="score"class="score1"></output>
+        </div>
+        <div class="timer">
+            <p>Timer</p>
+            <output id="timer" class="timer1"></output>
+        </div>
+    </div>
+
+    <script>
+
+        //questions array
+        var questions = {
+            q1: ["In which movie did Jim Carrey play a bank cleark named Stanley Ipkiss who turns into a spunky superhero when a mask is put on?"],
+            q2: ["Where was Jim Carrey born?"],
+            q3: ["How many Academy Awards has Jim Carrey been nominated for?"],
+            q4: ["Which movie did Jim turn down to be in Bruce Almight instead?"],
+            q5: ["Which of these films is Jim Carreys most sucessful film? (gross earnings)"],
+
+
+        };
+        var questionsArray = [questions.q1, questions.q2, questions.q3, questions.q4, questions.q5];
+        // answers array
+        var answers = {
+            a1: ["Me, Myself, and Irene", "Kick-Ass 2", "How the Grinch Stole Chrismas", "The Mask"],
+            a2: ["Los Angeles, California", "Ontario, Canada", "Appleton, Wisconsin", " Velva, North Dakota"],
+            a3: ["4", "2", "0", "1"],
+            a4: ["Pirates of the Caribbean", "Finding Nemo", "Old School", "Cheaper by the Dozen"],
+            a5: ["Dumb and Dumber", "How the Grinch Stole Christmas", "The Truman Show", "Batman Forever"],
+        };
+        //correct answers
+        var correctAnswer1 = answers.a1[3];
+        var correctAnswer2 = answers.a2[1];
+        var correctAnswer3 = answers.a3[2];
+        var correctAnswer4 = answers.a4[0];
+        var correctAnswer5 = answers.a5[1];
+        var score = 1;
+        
+
+        var counter = 45;
+
+        window.onload = function () {
+            $("#timer").html(counter);
+            setTimeout(askQuestionOne, 1000);
+            setTimeout(timerFunction, 1000);
+
+            function timerFunction() {
+                var counter = 45;
+                setInterval(function () {
+                    counter--;
+                    if (counter >= 0) {
+                        $("#timer").html(counter);
+                          
+
+                    }
+                    if (counter === 0) {
+                        $("#question-area").html("You Lose")
+                        clearInterval(counter);
+                        youLose();
+                    }
+                }, 1000);
+
+            };
+
+            function youLose (){
+                $('#question-area').html("YOU LOSE!");
+            }
+
+            function askQuestionOne() {
+                $("#question-area").text(questions.q1);
+                $(".button1").text(answers.a1[0]);
+                $(".button2").text(answers.a1[1]);
+                $(".button3").text(answers.a1[2]);
+                $(".button4").text(answers.a1[3]);
+
+                $("button").on("click", function () {
+
+                    var correctAnswer = $(this).html();
+
+                    if (correctAnswer == correctAnswer1) {
+                        $("#score").html(score);
+                        score++; 
+                        $("#response-display").html("correct");
+                       
+                        askQuestionTwo();
+
+                    } else {
+                        $("#response-display").html("wrong");
+                        askQuestionTwo();  
+
+                    }
+                });
+
+            };
+
+            function askQuestionTwo() {
+                $("#question-area").text(questions.q2);
+                $(".button1").text(answers.a2[0]);
+                $(".button2").text(answers.a2[1]);
+                $(".button3").text(answers.a2[2]);
+                $(".button4").text(answers.a2[3]);
+
+                $("button").on("click", function () {
+
+                    var correctAnswer = $(this).html();
+
+                    if (correctAnswer == correctAnswer2) {
+                        $("#score").html(score);
+                        score++; 
+                        $("#response-display").html("correct");
+
+                        askQuestionThree();
+
+                    } else {
+                        $("#response-display").html("wrong");
+                        askQuestionThree();
+
+                    }
+
+
+                });
+
+            };
+
+            function askQuestionThree() {
+                $("#question-area").text(questions.q3);
+                $(".button1").text(answers.a3[0]);
+                $(".button2").text(answers.a3[1]);
+                $(".button3").text(answers.a3[2]);
+                $(".button4").text(answers.a3[3]);
+
+                $("button").on("click", function () {
+
+                    var correctAnswer = $(this).html();
+
+                    if (correctAnswer == correctAnswer3) {
+                        $("#score").html(score);
+                        score++; 
+                        $("#response-display").html("correct");
+                        askQuestionFour();
+
+                    } else {
+                        $("#response-display").html("wrong");
+                        askQuestionFour();
+
+                    }
+
+
+                });
+
+            };
+
+            function askQuestionFour() {
+                $("#question-area").text(questions.q4);
+                $(".button1").text(answers.a4[0]);
+                $(".button2").text(answers.a4[1]);
+                $(".button3").text(answers.a4[2]);
+                $(".button4").text(answers.a4[3]);
+
+                $("button").on("click", function () {
+
+                    var correctAnswer = $(this).html();
+
+                    if (correctAnswer == correctAnswer4) {
+                        $("#score").html(score);
+                        score++; 
+                        $("#response-display").html("correct");
+                        endOfGame();
+                    } else {
+                        $("#response-display").html("wrong");
+                        endOfGame();
+                    }
+
+
+                });
+
+            };
+
+            function endOfGame(){
+                $("#question-area").html("Game Over");
+                clearInterval(counter);
+                $("#response-display").html("");
+
+            }
+
+            
+
+        };
+
+    </script>
+</body>
+
+</html>
